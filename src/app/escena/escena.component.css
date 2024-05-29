@@ -1,0 +1,7 @@
+.boton-activo {
+  background-color: black;
+}
+
+.boton-no-activo {
+  border: 1px solid black;
+}

@@ -1,7 +1,52 @@
-.boton-activo {
+/* .boton-activo {
   background-color: black;
 }
 
 .boton-no-activo {
   border: 1px solid black;
 }
+
+.active {
+  display: block;
+} */
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+}
+
+.card-container {
+  position: relative;
+  width: 20em;
+  height: 100%;
+}
+
+.card {
+  display: none; /* Ocultamos todas las tarjetas por defecto */
+}
+
+.card-inner {
+  height: 100%; /* Ajusta este valor para que la imagen sea más alta */
+}
+
+.card-img-top {
+  height: 150%;
+  width: 100%;
+  object-fit: cover; /* Ajusta cómo se muestra la imagen dentro del contenedor */
+}
+
+.card.active {
+  display: block; /* Mostramos solo la tarjeta activa */
+}
+
+.boton-activo {
+  background-color: #000305;
+}
+
+.boton-no-activo {
+  background-color: #6c757d;
+}
+

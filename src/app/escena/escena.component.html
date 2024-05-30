@@ -1,74 +1,34 @@
-<!--<div *ngFor="let step of steps" [style.background-color]="step.bgcolor">
-  <h2>{{ step.title }}</h2>
-  <p>{{ step.description }}</p>
-  <img [src]="step.img" alt="{{ step.title }}">
-</div>-->
-
-
-@for(step of steps; track $index){
-  <div class="card" style="width: 18rem;">
-    <div [style.background-color]="step.bgcolor" class="card">
-      <img [src]="step.img" class="card-img-top" alt="{{ step.title }}">
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">{{step.title}}</h5>
-      <p class="card-text">{{ step.description }}</p>
-      <div class="container">
-        <div class="row d-flex">
-          <div class="col-6 justify-content-start">            
-            <span>
-              @for(step of steps; track $index){
-                <button class="btn btn-sm me-1 rounded-pill" 
-                        [ngClass]="{'boton-activo': $index === currentStep, 'boton-no-activo': $index !== currentStep}"
-                        (click)="currentStep = $index">
+<div class="carousel-container mt-5">
+  <div class="card-container rounded">
+    <div *ngFor="let step of steps; let i = index" class="card " [class.active]="i === currentStep">
+      <div [style.backgroundColor]="step.bgcolor" class="card-inner rounded-top">
+        <img [src]="step.img" class="card-img-top" alt="{{ step.title }}">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ step.title }}</h5>
+        <p class="card-text">{{ step.description }}</p>
+        <div class="container">
+          <div class="row d-flex">
+            <div class="col-6 justify-content-start">
+              <span>
+                <button *ngFor="let step of steps; let idx = index" 
+                        class="btn btn-sm me-1 rounded-pill" 
+                        [ngClass]="{'boton-activo': idx === currentStep, 'boton-no-activo': idx !== currentStep}"
+                        (click)="setCurrentStep(idx)">
                 </button>
-              }              
-            </span>
-          </div>          
-          <div class="col-6 d-flex justify-content-end">
-            @for(step of steps; track $index; let first = $first; let last = $last){
-              @if($first){
-                <button class="btn btn-dark rounded-circle position-relative m-1" onclick="irAdelante()">
-                  <span class="position-absolute top-50 start-50 translate-middle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 .5 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.793 8 8.146 2.354a.5.5 0 0 1 0-.708z"/>
-                      <path fill-rule="evenodd" d="M0 8a.5.5 0 0 1 .5-.5h13.793l-4.647-4.646a.5.5 0 0 1 .708-.708l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L14.293 8H.5A.5.5 0 0 1 0 8z"/>
-                    </svg>
-                  </span>
-                </button>
-              }
-              @else if($last){
-                <button class="btn btn-dark rounded-circle position-relative m-1" onclick="irAtras()">
-                  <span class="position-absolute top-50 start-50 translate-middle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M7.354 1.646a.5.5 0 0 1 0 .708L2.707 7h10.586a.5.5 0 0 1 0 1H2.707l4.647 4.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                    </svg>
-                  </span>
-                </button>
-              }
-              @else {
-                <button class="btn btn-dark rounded-circle position-relative m-1" onclick="irAtras()">
-                  <span class="position-absolute top-50 start-50 translate-middle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M7.354 1.646a.5.5 0 0 1 0 .708L2.707 7h10.586a.5.5 0 0 1 0 1H2.707l4.647 4.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                    </svg>
-                  </span>
-                </button>
-                <button class="btn btn-dark rounded-circle position-relative m-1" onclick="irAdelante()">
-                  <span class="position-absolute top-50 start-50 translate-middle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 .5 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.793 8 8.146 2.354a.5.5 0 0 1 0-.708z"/>
-                      <path fill-rule="evenodd" d="M0 8a.5.5 0 0 1 .5-.5h13.793l-4.647-4.646a.5.5 0 0 1 .708-.708l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L14.293 8H.5A.5.5 0 0 1 0 8z"/>
-                    </svg>
-                  </span>
-                </button>  
-              }                
-            }        
+              </span>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+              <button *ngIf="currentStep > 0" class="btn btn-dark rounded-circle position-relative m-1" (click)="irAtras(i)">
+                <i class="bi bi-arrow-left"></i>
+              </button>
+              <button *ngIf="currentStep < steps.length - 1" class="btn btn-dark rounded-circle position-relative m-1" (click)="irAdelante(i)">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>            
+      </div>
     </div>
   </div>
-}
-
-
+</div>

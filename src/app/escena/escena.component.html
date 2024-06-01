@@ -1,6 +1,6 @@
 <div class="carousel-container mt-5">
   <div class="card-container rounded">
-    <div *ngFor="let step of steps; let i = index" class="card " [class.active]="i === currentStep">
+    <div *ngFor="let step of steps; let i = index" class="card" [class.active]="i === currentStep">
       <div [style.backgroundColor]="step.bgcolor" class="card-inner rounded-top">
         <img [src]="step.img" class="card-img-top" alt="{{ step.title }}">
       </div>
